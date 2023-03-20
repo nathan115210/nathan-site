@@ -50,8 +50,8 @@ export const services: TitleProps[] = [
 ];
 export const experiences: ExperiencesProps[] = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
+    title: "Developer",
+    company_name: "Luxid Group Oy",
     icon: luxid,
     bgColor: "#67eea2",
     textColor: "#000",
@@ -65,7 +65,7 @@ export const experiences: ExperiencesProps[] = [
   },
   {
     title: "Developer",
-    company_name: "Luxus Worldwide OY",
+    company_name: "Luxus Worldwide Oy",
     icon: luxus,
     bgColor: "#001640",
     iconClassNames: "w-full h-full",
@@ -79,7 +79,7 @@ export const experiences: ExperiencesProps[] = [
   },
   {
     title: "Web Developer",
-    company_name: "XOOMPOINT OY",
+    company_name: "XOOMPOINT Oy",
     icon: xoompoint,
     bgColor: "#676767",
     iconClassNames: "w-full h-full",

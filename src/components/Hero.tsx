@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import ComputersCanvas from "./canvas/ComputersCanvas";
+/*import ComputersCanvas from "./canvas/ComputersCanvas";*/
+import SectionWrapper from "./SectionWrapper";
+import { textVariant } from "../utils/motion";
 
 const Hero = () => {
   const { paddingX, heroHeadText, heroSubText } = styles;
   return (
-    <section className={"relative w-full h-screen mx-auto"}>
+    <SectionWrapper
+      sectionId={"Hero"}
+      classNames={"relative w-full h-64 mx-auto"}
+    >
       <div
         className={`absolute inset-0 top-[120px]  max-w-7xl mx-auto ${paddingX} flex flex-row items-start gap-5`}
       >
@@ -14,16 +19,16 @@ const Hero = () => {
           <div className="w-1 sm:h-48 h-24 violet-gradient" />
         </div>
 
-        <div>
+        <motion.div variants={textVariant()}>
           <h1 className={`${heroHeadText} text-white`}>
             Hi, I'm <span className="text-[#915EFF]">Zhao</span>
           </h1>
           <p className={`${heroSubText} mt-2 text-white-100`}>
             I develop web & mobile applications
           </p>
-        </div>
+        </motion.div>
       </div>
-      <ComputersCanvas />
+      {/*<ComputersCanvas />
       <div className="absolute xs:bottom-10 bottom-8 w-full flex justify-center items-center">
         <a href="#about">
           <div className="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2">
@@ -40,8 +45,8 @@ const Hero = () => {
             />
           </div>
         </a>
-      </div>
-    </section>
+      </div>*/}
+    </SectionWrapper>
   );
 };
 
