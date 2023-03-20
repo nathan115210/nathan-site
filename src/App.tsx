@@ -6,7 +6,7 @@ import Experience from "./components/Experience";
 import Tech from "./components/Tech";
 import Works from "./components/Works";
 import Contact from "./components/Contact";
-import StarsConvas from "./components/StarsConvas";
+import StarsCanvas from "./components/canvas/Stars";
 function App() {
   return (
     <BrowserRouter>
@@ -16,12 +16,12 @@ function App() {
           <Hero />
         </div>
         <About />
-        <Experience />
         <Tech />
+        <Experience />
         <Works />
         <div className={"relative z-0"}>
           <Contact />
-          <StarsConvas />
+          <StarsCanvas />
         </div>
       </div>
     </BrowserRouter>

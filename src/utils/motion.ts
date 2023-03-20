@@ -1,6 +1,6 @@
 import { Direction, TransitionType } from "./types";
 
-export const textVariant = (delay: number) => {
+export const textVariant = (delay?: number) => {
   return {
     hidden: {
       y: -50,
@@ -17,13 +17,14 @@ export const textVariant = (delay: number) => {
     },
   };
 };
+interface FadeInProps {
+  direction: Direction | string;
+  type: TransitionType | string;
+  delay: number;
+  duration: number;
+}
 
-export const fadeIn = (
-  direction: Direction,
-  type: TransitionType,
-  delay: number,
-  duration: number
-) => {
+export const fadeIn = ({ direction, type, delay, duration }: FadeInProps) => {
   return {
     hidden: {
       x: direction === "left" ? 100 : direction === "right" ? -100 : 0,
@@ -63,12 +64,14 @@ export const zoomIn = (delay: number, duration: number) => {
   };
 };
 
-export const slideIn = (
-  direction: Direction,
-  type: TransitionType,
-  delay: number,
-  duration: number
-) => {
+interface SlideInProps {
+  direction: Direction;
+  type: TransitionType;
+  delay: number;
+  duration: number;
+}
+
+export const slideIn = ({ direction, type, delay, duration }: SlideInProps) => {
   return {
     hidden: {
       x: direction === "left" ? "-100%" : direction === "right" ? "100%" : 0,
@@ -88,14 +91,14 @@ export const slideIn = (
 };
 
 export const staggerContainer = (
-  staggerChildren: number,
-  delayChildren: number
+  staggerChildren?: number,
+  delayChildren?: number
 ) => {
   return {
     hidden: {},
     show: {
       transition: {
-        staggerChildren: staggerChildren,
+        staggerChildren: staggerChildren || 0,
         delayChildren: delayChildren || 0,
       },
     },

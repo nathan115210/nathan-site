@@ -1,25 +1,11 @@
-import type { FC } from "react";
 import { styles } from "../styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
 import close from "../assets/close.svg";
+import { navLinks } from "../utils/content";
 
-const navLinks = [
-  {
-    id: "about",
-    title: "About",
-  },
-  {
-    id: "work",
-    title: "Work",
-  },
-  {
-    id: "contact",
-    title: "Contact",
-  },
-];
 const Navbar = () => {
   const [active, setActive] = useState<string>("");
   const [toggle, setToggle] = useState<boolean>(false);
@@ -57,13 +43,7 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Zhao &nbsp;
-            <span className="sm:block hidden">
-              |&nbsp; Developer, Sneakerhead And Foodie
-            </span>
-          </p>
+          <img src={logo} alt="logo" className="w-20 h-20 object-contain" />
         </Link>
 
         <ul className="list-none hidden sm:flex flex-row gap-10">
