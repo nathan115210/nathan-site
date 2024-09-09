@@ -1,15 +1,15 @@
 import { motion } from "framer-motion";
+import { FC } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
-import SectionWrapper from "./SectionWrapper";
-import { textVariant } from "../utils/motion";
-import { styles } from "../styles";
-import { FC } from "react";
 import "react-vertical-timeline-component/style.min.css";
-import { ExperiencesProps } from "../utils/types";
+import { styles } from "../styles";
 import { experiences } from "../utils/content";
+import { textVariant } from "../utils/motion";
+import { ExperiencesProps } from "../utils/types";
+import SectionWrapper from "./SectionWrapper";
 
 const ExperienceCard: FC<ExperiencesProps> = (props) => {
   const {

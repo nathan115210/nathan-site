@@ -1,24 +1,28 @@
-import xoompoint from "../assets/company/xoompoint.png";
-import luxus from "../assets/company/luxus.png";
 import luxid from "../assets/company/luxid.svg";
-import { ExperiencesProps, ProjectProps, TitleProps } from "./types";
-import web from "../assets/services/web.png";
+import luxus from "../assets/company/luxus.png";
+import nordea from "../assets/company/nordea.svg";
+import xoompoint from "../assets/company/xoompoint.png";
+import dell from "../assets/projects/dell.png";
+import nokia from "../assets/projects/nokia.png";
+import npm from "../assets/projects/npm.png";
 import mobile from "../assets/services/mobile.png";
+import web from "../assets/services/web.png";
+import azure from "../assets/tech/azure.svg";
+import gatsby from "../assets/tech/gatsby.svg";
+import graphQL from "../assets/tech/graphQL.svg";
 import javascript from "../assets/tech/javascript.png";
-import typescript from "../assets/tech/typescript.png";
+import jest from "../assets/tech/jest.png";
+import kotlin from "../assets/tech/kotlin.svg";
+import mongodb from "../assets/tech/mongodb.png";
+import nextjs from "../assets/tech/nextjs.svg";
+import nodejs from "../assets/tech/nodejs.png";
 import reactjs from "../assets/tech/reactjs.png";
 import redux from "../assets/tech/redux.png";
-import nodejs from "../assets/tech/nodejs.png";
+import swift from "../assets/tech/swift.svg";
 import threejs from "../assets/tech/threejs.svg";
-import nextjs from "../assets/tech/nextjs.svg";
-import mongodb from "../assets/tech/mongodb.png";
-import jest from "../assets/tech/jest.png";
-import graphQL from "../assets/tech/graphQL.svg";
+import typescript from "../assets/tech/typescript.png";
 import vuejs from "../assets/tech/vuejs.svg";
-import gatsby from "../assets/tech/gatsby.svg";
-import npm from "../assets/projects/npm.png";
-import nokia from "../assets/projects/nokia.png";
-import dell from "../assets/projects/dell.png";
+import { ExperiencesProps, ProjectProps, TitleProps } from "./types";
 
 export const navLinks = [
   {
@@ -50,12 +54,23 @@ export const services: TitleProps[] = [
 ];
 export const experiences: ExperiencesProps[] = [
   {
-    title: "Developer",
+    title: "Senior IT Developer",
+    company_name: "Nordea Bank",
+    icon: nordea,
+    bgColor: "#00005e",
+    textColor: "#fff",
+    date: "June 2024 - present",
+    points: [
+      
+    ],
+  },
+  {
+    title: "Developer & Senior Developer",
     company_name: "Luxid Group Oy",
     icon: luxid,
     bgColor: "#67eea2",
-    textColor: "#000",
-    date: "September 2022 - present",
+    textColor: "#fff",
+    date: "September 2022 - May 2024",
     points: [
       "Developing and maintaining web applications using React.js, TypeScript, Contentful, Node.js, and other related technologies.",
       "Building the eCommerce websites with Shopify and BigCommerce",
@@ -93,6 +108,14 @@ export const technologies: TitleProps[] = [
   {
     title: "JavaScript",
     icon: javascript,
+  },
+  {
+    title: "swift",
+    icon: swift,
+  },
+  {
+    title: "kotlin",
+    icon: kotlin,
   },
   {
     title: "React JS",
@@ -137,6 +160,10 @@ export const technologies: TitleProps[] = [
   {
     title: "Jest",
     icon: jest,
+  },
+  {
+    title: "azure",
+    icon: azure,
   },
 ];
 
