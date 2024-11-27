@@ -6,16 +6,16 @@ import { useEffect, useState } from "react";
 
 export const PinContainer = ({
   children,
-  title,
-  href,
+  link,
   className,
   containerClassName,
+  enableAnimation = true,
 }: {
   children: React.ReactNode;
-  title?: string;
-  href: string;
+  link?: string;
   className?: string;
   containerClassName?: string;
+  enableAnimation?: boolean;
 }) => {
   const [transform, setTransform] = useState(
     "translate(-50%,-50%) rotateX(0deg)",
@@ -36,16 +36,19 @@ export const PinContainer = ({
   const onMouseLeave = () => {
     setTransform("translate(-50%,-50%) rotateX(0deg) scale(1)");
   };
+  const Tag = link ? Link : "div";
+  const containerProps =
+    link && enableAnimation ? { onMouseEnter, onMouseLeave } : {};
 
   return (
-    <Link
+    <Tag
       className={cn(
         "relative group/pin z-50  cursor-pointer",
         containerClassName,
       )}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      href={href}
+      {...containerProps}
+      target="_blank"
+      href={link || ""}
     >
       <div
         style={{
@@ -64,8 +67,8 @@ export const PinContainer = ({
           <div className={cn(" relative z-50 ", className)}>{children}</div>
         </div>
       </div>
-      <PinPerspective title={title} href={href} />
-    </Link>
+      {link && <PinPerspective title={link} href={link} />}
+    </Tag>
   );
 };
 
@@ -120,7 +123,7 @@ export const PinPerspective = ({
                 repeat: Infinity,
                 delay: 0,
               }}
-              className="absolute left-1/2 top-1/2  h-[11.25rem] w-[11.25rem] rounded-[50%] bg-sky-500/[0.08] shadow-[0_8px_16px_rgb(0_0_0/0.4)]"
+              className="absolute left-1/2 top-1/2  h-[11.25rem] w-[11.25rem] rounded-[50%]bg-sky-500/[0.08] shadow-[0_8px_16px_rgb(0_0_0/0.4)]"
             ></motion.div>
             <motion.div
               initial={{

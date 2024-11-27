@@ -14,7 +14,7 @@ export const aboutMeItems = [
     className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
     imgClassName: "w-full h-full",
     titleClassName: "justify-end",
-    img: "/b1.svg",
+    img: "/bg.png",
     spareImg: "",
     itemLink: "/projects",
     linkText: "View All",
@@ -49,7 +49,7 @@ export const aboutMeItems = [
     imgClassName: "",
     titleClassName: "justify-start",
     img: "/grid.svg",
-    spareImg: "/b4.svg",
+    spareImg: "/b2.svg",
   },
 
   {
@@ -59,7 +59,7 @@ export const aboutMeItems = [
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
     titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
+    img: "/b3.svg",
     spareImg: "/grid.svg",
   },
   {
@@ -74,38 +74,99 @@ export const aboutMeItems = [
   },
 ];
 
+enum TechName {
+  TS = "TypeScript",
+  JS = "JavaScript",
+  React = "ReactJS",
+  THREE = "ThreeJs",
+  TAILWIND = "TailwindCSS",
+  STENCIL = "StencilJS",
+  ANGULAR = "Angular",
+  JEST = "Jest",
+  NODE = "NodeJs",
+  GRAPHQL = "GraphQL",
+  AEM = "AEM",
+  GSAP = "GSAP",
+  NEXT = "NextJS",
+  DOCKER = "Docker",
+  CONTENTFUL = "Contentful",
+  CSS = "CSS",
+  AZURE = "Azure",
+  GATSBY = "Gatsby",
+  SCSS = "SCSS",
+}
+
+const generateTechListWithName = (nameList: TechName[]): string[] => {
+  return nameList.map((name) => {
+    return "/techIcons/" + name + ".svg";
+  });
+};
+
 export const projects = [
   {
-    id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "https://twitter.com/mannupaaji",
+    title: "normalizedui - React UI Library",
+    des: "normalizedui is a React component library which is made by typescript with React. Most components have their own unit testing made by jest. As well as been published on npm.",
+    img: "/projects/npm.png",
+    techList: generateTechListWithName([
+      TechName.React,
+      TechName.TS,
+      TechName.JEST,
+      TechName.NODE,
+    ]),
+    link: "https://www.npmjs.com/package/normalizedui",
+    githubLink: "https://github.com/nathan115210/Normalized",
+  },
+
+  {
+    title: "HMD",
+    des: "New feature development and maintenance for HMD site, covering in 30+ languages across 80+ markets., using React Js, TypeScript and styled components as the main technologies for front-end development. and use Node.js, GraphQL, Contentful, and Azure Functions on the backend",
+    img: "/career/hmd1.png",
+    techList: generateTechListWithName([
+      TechName.React,
+      TechName.TS,
+      TechName.JEST,
+      TechName.CONTENTFUL,
+      TechName.NODE,
+
+      TechName.GRAPHQL,
+    ]),
+    link: "https://www.hmd.com",
   },
   {
-    id: 2,
-    title: "Yoom - Video Conferencing App",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "/ui.yoom.com",
+    title: "HMD email Generator",
+    des: "A fully customized email builder tool to streamline the creation of dynamic marketing campaigns and transactional HTML emails, covering over 40 + business scenarios in 30+ languages.",
+    img: "/career/nokia2.png",
+    techList: generateTechListWithName([
+      TechName.React,
+      TechName.TS,
+      TechName.AZURE,
+      TechName.CONTENTFUL,
+      TechName.NODE,
+      TechName.GRAPHQL,
+    ]),
   },
   {
-    id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "/ui.aiimg.com",
+    title: "HMD Connect",
+    des: "Marketing and subscription site for a roaming service that allows users to stay connected to the internet while traveling abroad. The site is built using Gatsby, TypeScript, SCSS and Contentful.",
+    img: "/projects/hmd-connect.jpg",
+    techList: generateTechListWithName([
+      TechName.GATSBY,
+      TechName.TS,
+      TechName.SCSS,
+      TechName.CONTENTFUL,
+    ]),
   },
   {
-    id: 4,
-    title: "Animated Apple Iphone 3D Website",
-    des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "/ui.apple.com",
+    title: "DELL EMC",
+    des: "Developing the new features, maintenance, Quality assurance and content management for Dell EMC and Dell technology sites based on content management platform Adobe Experience Manager(AEM), using JavaScript, CSS, and Handlebars",
+    img: "/career/dell.png",
+    techList: generateTechListWithName([
+      TechName.JS,
+      TechName.AEM,
+      TechName.CSS,
+      TechName.NODE,
+    ]),
+    link: "https://www.dell.com/en-us",
   },
 ];
 
