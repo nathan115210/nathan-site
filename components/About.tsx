@@ -1,6 +1,5 @@
 import { aboutMeItems } from "@/data";
 import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
-import Link from "next/link";
 
 const About = () => {
   return (

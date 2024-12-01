@@ -43,11 +43,14 @@ export const aboutMeItems = [
   },
   {
     id: 4,
-    title: "Tech enthusiast with a passion for development.",
+    title:
+      "Also enjoy creating small demos for fun while exploring new technologies.",
     label: "",
     className: "lg:col-span-2 md:col-span-3 md:row-span-1",
     imgClassName: "",
     titleClassName: "justify-start",
+    itemLink: "/code-snippets",
+    linkText: "My code snippets",
     img: "/grid.svg",
     spareImg: "/b2.svg",
   },

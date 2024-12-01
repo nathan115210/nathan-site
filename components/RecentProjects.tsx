@@ -15,12 +15,12 @@ const RecentProjects = () => {
           "flex flex-col items-center p-4 max-w-4xl pb-20 mx-auto relative z-10  w-full"
         }
       >
-        <p className="lg:text-xl lg:font-normal font-light text-sm">
+        <p className="lg:text-xl lg:font-normal font-light text-sm text-center">
           These projects showcase my skills and experience through real-world
           examples, including personal and real business projects from the work.
         </p>
       </div>
-      <div className="flex flex-wrap items-center justify-center p-4 gap-60	gap-y-8 max-lg:gap-y-32 mt-10">
+      <div className="flex flex-wrap items-center justify-center gap-40	max-lg:gap-y-48 mt-10">
         {projects.map((item, index) => (
           <div
             className="sm:h-[41rem] h-[32rem] lg:min-h-[32.5rem] flex items-center justify-center sm:w-[500px] w-[80vw]"
