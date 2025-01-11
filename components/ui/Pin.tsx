@@ -19,7 +19,6 @@ export const PinContainer = ({
   enableAnimation?: boolean;
   showPinPerspective?: boolean;
 }) => {
-  console.log("enableAnimation", enableAnimation);
   const [transform, setTransform] = useState(
     "translate(-50%,-50%) rotateX(0deg)",
   );
