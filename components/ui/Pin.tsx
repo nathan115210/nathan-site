@@ -10,13 +10,16 @@ export const PinContainer = ({
   className,
   containerClassName,
   enableAnimation = true,
+  showPinPerspective = true,
 }: {
   children: React.ReactNode;
   link?: string;
   className?: string;
   containerClassName?: string;
   enableAnimation?: boolean;
+  showPinPerspective?: boolean;
 }) => {
+  console.log("enableAnimation", enableAnimation);
   const [transform, setTransform] = useState(
     "translate(-50%,-50%) rotateX(0deg)",
   );
@@ -67,7 +70,9 @@ export const PinContainer = ({
           <div className={cn(" relative z-50 ", className)}>{children}</div>
         </div>
       </div>
-      {link && <PinPerspective title={link} href={link} />}
+      {link && showPinPerspective && (
+        <PinPerspective title={link} href={link} />
+      )}
     </Tag>
   );
 };

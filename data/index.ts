@@ -120,6 +120,7 @@ export const projects: ProjectItemProps[] = [
     ]),
     link: "https://www.npmjs.com/package/normalizedui",
     githubLink: "https://github.com/nathan115210/Normalized",
+    enableAnimation: false,
   },
 
   {
@@ -227,15 +228,11 @@ export const socialMedia = [
 
 export const codeSnippets: ProjectItemProps[] = [
   {
-    title: "Lorem Ipsum",
-    des: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum",
-    img: "/career/dell.png",
-    techList: generateTechListWithName([
-      TechName.JS,
-      TechName.AEM,
-      TechName.CSS,
-      TechName.NODE,
-    ]),
-    link: "Lorem Ipsum",
+    title: "Tank progress bar",
+    des: "I have seen a very interesting tank progress bar on the internet, so I decided to make one myself. It is a simple tank progress bar that can be used in any React project.",
+    img: "/code-snippets/demo-tank-progress.png",
+    link: "/code-snippets/tank-progress",
+    showPinPerspective: false,
+    enableAnimation: false,
   },
 ];
