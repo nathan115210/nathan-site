@@ -1,3 +1,5 @@
+import { ProjectItemProps } from "@/components/RecentProjects";
+
 export const navItems = [
   { name: "About", link: "/#about" },
   { name: "Projects", link: "/projects" },
@@ -105,7 +107,7 @@ const generateTechListWithName = (nameList: TechName[]): string[] => {
   });
 };
 
-export const projects = [
+export const projects: ProjectItemProps[] = [
   {
     title: "normalizedui - React UI Library",
     des: "normalizedui is a React component library which is made by typescript with React. Most components have their own unit testing made by jest. As well as been published on npm.",
@@ -220,5 +222,20 @@ export const socialMedia = [
   {
     img: "/link.svg",
     link: "https://www.linkedin.com/in/zhao-hongyu/",
+  },
+];
+
+export const codeSnippets: ProjectItemProps[] = [
+  {
+    title: "Lorem Ipsum",
+    des: "Lorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem IpsumLorem Ipsum",
+    img: "/career/dell.png",
+    techList: generateTechListWithName([
+      TechName.JS,
+      TechName.AEM,
+      TechName.CSS,
+      TechName.NODE,
+    ]),
+    link: "Lorem Ipsum",
   },
 ];

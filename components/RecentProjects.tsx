@@ -1,14 +1,28 @@
-import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
 import MagicButton from "@/components/MagicButton";
 import { FaLocationArrow } from "react-icons/fa6";
 import Link from "next/link";
 
-const RecentProjects = () => {
+export interface ProjectItemProps {
+  img: string;
+  title: string;
+  des: string;
+  techList: string[];
+  link?: string;
+  githubLink?: string;
+}
+
+export interface ProjectsProps {
+  heading: string;
+  description: string;
+  items: ProjectItemProps[];
+}
+
+const RecentProjects = ({ heading, items, description }: ProjectsProps) => {
   return (
-    <div className="mt-40">
+    <div className="mt-40 pb-40">
       <h2 className="heading">
-        <span className="text-purple">Projects</span>
+        <span className="text-purple">{heading}</span>
       </h2>
       <div
         className={
@@ -16,12 +30,11 @@ const RecentProjects = () => {
         }
       >
         <p className="lg:text-xl lg:font-normal font-light text-sm text-center">
-          These projects showcase my skills and experience through real-world
-          examples, including personal and real business projects from the work.
+          {description}
         </p>
       </div>
       <div className="flex flex-wrap items-center justify-center gap-40	max-lg:gap-y-48 mt-10">
-        {projects.map((item, index) => (
+        {items.map((item, index) => (
           <div
             className="sm:h-[41rem] h-[32rem] lg:min-h-[32.5rem] flex items-center justify-center sm:w-[500px] w-[80vw]"
             key={index}

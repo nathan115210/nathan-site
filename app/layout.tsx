@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
+import Footer from "@/components/Footer";
+import { navItems } from "@/data";
+import { FloatingNav } from "@/components/ui/FloatingNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +30,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <FloatingNav navItems={navItems} />
+          <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 ">
+            {children}
+          </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

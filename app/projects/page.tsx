@@ -1,18 +1,14 @@
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import { navItems } from "@/data";
-import RecentProjects from "@/components/RecentProjects";
-import Footer from "@/components/Footer";
+import { projects } from "@/data";
+import RecentProjects, { ProjectsProps } from "@/components/RecentProjects";
 
 const page = () => {
-  return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5">
-      <div className="max-w-7xl w-full">
-        <FloatingNav navItems={navItems} />
-        <RecentProjects />
-        <Footer />
-      </div>
-    </main>
-  );
+  const recentProjectsData: ProjectsProps = {
+    heading: "Projects",
+    description:
+      "These projects showcase my skills and experience through real-world examples, including personal and real business projects from the work.",
+    items: projects,
+  };
+  return <RecentProjects {...recentProjectsData} />;
 };
 
 export default page;
