@@ -33,10 +33,10 @@ const Page = () => {
     setValue(e.target.value);
 
   return (
-    <Layout>
-      <h2 className="heading mb-10">Tank progress bar</h2>
+    <Layout className={"w-screen h-screen mt-40 bg-slate-50 text-black"}>
+      <h2 className="heading pt-10 mb-10">Tank progress bar</h2>
 
-      <div className={styles.slidecontainer}>
+      <div className={`p-6 ${styles.slidecontainer}`}>
         <div className={styles.percentContainer}>
           <div className={styles.percent}>
             <span>{value}</span>
