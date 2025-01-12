@@ -1,6 +1,5 @@
 "use client";
 
-import Layout from "../layout";
 import { useEffect, useRef, useState } from "react";
 import styles from "./page.module.scss";
 
@@ -33,7 +32,7 @@ const Page = () => {
     setValue(e.target.value);
 
   return (
-    <Layout className={"w-screen h-screen mt-40 bg-slate-50 text-black"}>
+    <div className={"w-screen h-screen mt-40 bg-slate-50 text-black"}>
       <h2 className="heading pt-10 mb-10">Tank progress bar</h2>
 
       <div className={`p-6 ${styles.slidecontainer}`}>
@@ -54,7 +53,7 @@ const Page = () => {
           onChange={(e) => handleInputOnChange(e)}
         />
       </div>
-    </Layout>
+    </div>
   );
 };
 
