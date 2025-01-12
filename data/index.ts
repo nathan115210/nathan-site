@@ -233,6 +233,12 @@ export const codeSnippets: ProjectItemProps[] = [
     img: "/code-snippets/demo-tank-progress.png",
     link: "/code-snippets/tank-progress",
     showPinPerspective: false,
-    enableAnimation: false,
+  },
+  {
+    title: "Cool hover effects card",
+    des: "Hover effect of Card can be more attractive and interactive. Here is a simple card with cool hover effects.",
+    img: "/code-snippets/cool-hover-effects.png",
+    link: "/code-snippets/cool-hover-effects",
+    showPinPerspective: false,
   },
 ];

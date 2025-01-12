@@ -1,0 +1,59 @@
+$card-width: 220px;
+$card-height: 320px;
+
+.card {
+  position: relative;
+  width: $card-width;
+  height: $card-height;
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 15px;
+  cursor: pointer;
+  /*overflow: hidden;*/
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    width: 20%;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.5s;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    border-radius: 15px 0 100%;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    border-radius: 100% 0 15px;
+  }
+
+  &:hover::before, &:hover::after {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    transition: all 0.5s;
+  }
+
+  &:hover:after {
+    content: "HELLO WORLD";
+  }
+
+  &:hover::before,
+  &:hover::after {
+    background-color: lightcoral;
+  }
+}
+
