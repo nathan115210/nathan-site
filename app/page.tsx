@@ -5,7 +5,7 @@ import Hero from "@/components/Hero";
 import Skills from "@/components/Skills";
 import { Career } from "@/components/Career";
 
-const Home = () => {
+export default function Home() {
   return (
     <>
       <Hero />
@@ -14,6 +14,4 @@ const Home = () => {
       <Career />
     </>
   );
-};
-
-export default Home;
+}

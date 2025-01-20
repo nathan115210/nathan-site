@@ -1,4 +1,5 @@
-import { ProjectItemProps } from "@/components/RecentProjects";
+import type { ProjectItemProps } from "@/components/RecentProjects";
+import { DemoItemProps } from "@/app/code-snippets/page";
 
 export const navItems = [
   { name: "About", link: "/#about" },
@@ -226,19 +227,32 @@ export const socialMedia = [
   },
 ];
 
-export const codeSnippets: ProjectItemProps[] = [
+export const codeSnippets: DemoItemProps[] = [
   {
     title: "Tank progress bar",
-    des: "I have seen a very interesting tank progress bar on the internet, so I decided to make one myself. It is a simple tank progress bar that can be used in any React project.",
-    img: "/code-snippets/demo-tank-progress.png",
+    description:
+      "I have seen a very interesting tank progress bar on the internet, so I decided to make one myself.",
+    thumbnail: "/code-snippets/demo-tank-progress.png",
     link: "/code-snippets/tank-progress",
-    showPinPerspective: false,
   },
   {
     title: "Cool hover effects card",
-    des: "Hover effect of Card can be more attractive and interactive. Here is a simple card with cool hover effects.",
-    img: "/code-snippets/cool-hover-effects.png",
+    description:
+      "Hover effect of Card can be more attractive and interactive. Here is a simple card with cool hover effects.",
+    thumbnail: "/code-snippets/cool-hover-effects.png",
     link: "/code-snippets/cool-hover-effects",
-    showPinPerspective: false,
+  },
+  {
+    title: "Neumorphic Input Box",
+    description: "",
+    thumbnail: "/code-snippets/neumorphic-input-box.png",
+    link: "/code-snippets/neumorphic-input-box",
+  },
+  {
+    title: "Blinking Neon Text",
+    description:
+      "This effect can be applied to text entrances, text display effects on gaming websites, and similar scenarios.",
+    thumbnail: "/code-snippets/blinking-neon-text.png",
+    link: "/code-snippets/blinking-neon-text",
   },
 ];
