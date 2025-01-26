@@ -56,7 +56,6 @@ export const BentoGridItem = ({
   const rightLists = ["NodeJS", "NuxtJS", "GraphQL"];
 
   const [copied, setCopied] = useState(false);
-
   const defaultOptions = {
     loop: copied,
     autoplay: copied,
@@ -67,9 +66,13 @@ export const BentoGridItem = ({
   };
 
   const handleCopy = () => {
-    const text = "hsu@jsmastery.pro";
-    navigator.clipboard.writeText(text);
-    setCopied(true);
+    const emailAddress = process.env.EMAIL_ADDRESS;
+    if (emailAddress) {
+      navigator.clipboard.writeText(emailAddress);
+      setCopied(true);
+    } else {
+      console.warn("Email address is not set in the .env file");
+    }
   };
 
   return (

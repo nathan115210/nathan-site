@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const emailAddress: string = "nathan_115210@hotmail.com";
+  const emailAddress = process.env.EMAIL_ADDRESS;
   return (
     <footer className="w-full p-10" id="contact">
       <div className="flex flex-col items-center">
@@ -26,7 +26,7 @@ const Footer = () => {
       </div>
       <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
         <p className="md:text-base text-sm md:font-normal font-light">
-          Copyright © ${currentYear} Zhao Hongyu
+          {`Copyright ©${currentYear} Zhao Hongyu`}
         </p>
 
         <div className="flex items-center md:gap-3 gap-6">
