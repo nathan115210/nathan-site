@@ -60,7 +60,7 @@ export const aboutMeItems = [
 
   {
     id: 5,
-    title: "Currently building a JS Animation library",
+    title: "Currently building a Recipe App",
     label: "The Inside Scoop",
     className: "md:col-span-3 md:row-span-2",
     imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
@@ -109,6 +109,22 @@ const generateTechListWithName = (nameList: TechName[]): string[] => {
 };
 
 export const projects: ProjectItemProps[] = [
+  {
+    title: "Easy Meal",
+    des: "Easy Meal - Your go-to site for delicious recipes and cooking tips.",
+    img: "/coming-soon.png",
+    techList: generateTechListWithName([
+      TechName.React,
+      TechName.TS,
+      TechName.NEXT,
+      TechName.NODE,
+      TechName.TAILWIND,
+    ]),
+    link: "https://hey-easy-meal.netlify.app/",
+    githubLink: "https://github.com/nathan115210/easy-meal",
+    enableAnimation: false,
+  },
+
   {
     title: "normalizedui - React UI Library",
     des: "normalizedui is a React component library which is made by typescript with React. Most components have their own unit testing made by jest. As well as been published on npm.",
