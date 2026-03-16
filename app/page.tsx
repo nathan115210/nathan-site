@@ -1,17 +1,20 @@
-"use client";
+import { AboutSection } from "@/components/home/about-section";
+import { ContactCta } from "@/components/home/contact-cta";
+import { FeaturedProjects } from "@/components/home/featured-projects";
+import { HeroSection } from "@/components/home/hero-section";
+import { ToolsSection } from "@/components/home/tools-section";
+import { createMetadata } from "@/lib/seo";
 
-import About from "@/components/About";
-import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import { Career } from "@/components/Career";
+export const metadata = createMetadata();
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <Hero />
-      <About />
-      <Skills />
-      <Career />
+      <HeroSection />
+      <FeaturedProjects />
+      <AboutSection />
+      <ToolsSection />
+      <ContactCta />
     </>
   );
 }

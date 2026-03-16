@@ -1,5 +1,50 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in real values:
+
+```bash
+cp .env.example .env.local
+```
+
+Required for contact email sending:
+
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USER`
+- `SMTP_PASS`
+
+Optional:
+
+- `CONTACT_TO_EMAIL`
+- `CONTACT_FROM_EMAIL`
+- `CONTACT_RATE_LIMIT_MAX` (default `5` requests per minute per IP)
+
+In development, if SMTP variables are missing, the contact API uses an Ethereal test mailbox automatically instead of failing with 500.
+
+For production, use real SMTP credentials and do not use placeholder values such as `smtp.example.com` or `your_smtp_username`.
+
+### Outlook / Hotmail setup
+
+If you use an Outlook/Hotmail inbox, use:
+
+- `SMTP_HOST=smtp-mail.outlook.com`
+- `SMTP_PORT=587`
+- `SMTP_USER=<your_outlook_email>`
+- `SMTP_PASS=<your_outlook_app_password_or_mail_password>`
+
+`CONTACT_FROM_EMAIL` should generally match the authenticated mailbox/domain to avoid provider rejection.
+
+### Contact health endpoint
+
+You can verify contact-email readiness at:
+
+- `/api/contact/health`
+
+It returns configuration status without exposing secrets.
+In production, this endpoint returns HTTP `500` when SMTP configuration is invalid.
+
 ## Getting Started
 
 First, run the development server:

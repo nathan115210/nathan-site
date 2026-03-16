@@ -1,17 +1,27 @@
-import { Inter } from "next/font/google";
+import { Fraunces, IBM_Plex_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
-import Footer from "@/components/Footer";
-import { navItems } from "@/data";
-import { FloatingNav } from "@/components/ui/FloatingNavbar";
-import type { Metadata } from "next";
-import { getMetadata } from "@/lib/getMetadata";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { createMetadata } from "@/lib/seo";
 
-const inter = Inter({ subsets: ["latin"] });
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
 
-export async function generateMetadata(): Promise<Metadata> {
-  return await getMetadata();
-}
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  weight: ["400", "500"],
+});
+
+export const metadata = createMetadata();
 
 export default function RootLayout({
   children,
@@ -20,18 +30,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body
+        className={`${sora.variable} ${fraunces.variable} ${ibmPlexMono.variable}`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
-          <FloatingNav navItems={navItems} />
-          <main className="relative bg-black-100 flex justify-center items-center flex-col overflow-hidden mx-auto sm:px-10 px-5 ">
-            {children}
-          </main>
-          <Footer />
+          <div className="min-h-screen bg-bg-primary text-text-primary">
+            <SiteHeader />
+            <main className="relative overflow-hidden">{children}</main>
+            <SiteFooter />
+          </div>
         </ThemeProvider>
       </body>
     </html>
