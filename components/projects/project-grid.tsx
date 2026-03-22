@@ -1,11 +1,6 @@
-"use client";
-
-import { useState } from "react";
 import type { Project } from "@/types/project";
-import type { ProjectCategory } from "@/types/project";
-import { filterProjectsByCategory } from "@/lib/project-utils";
-import { ProjectFilter } from "@/components/projects/project-filter";
 import { ProjectCard } from "@/components/projects/project-card";
+import { ProjectGridWithFilters } from "@/components/projects/project-grid-with-filters";
 
 type ProjectGridProps = {
   projects: Project[];
@@ -16,19 +11,15 @@ export function ProjectGrid({
   projects,
   enableFilters = false,
 }: ProjectGridProps) {
-  const [activeFilter, setActiveFilter] = useState<ProjectCategory>("all");
-  const visibleProjects = enableFilters
-    ? filterProjectsByCategory(projects, activeFilter)
-    : projects;
+  if (enableFilters) {
+    return <ProjectGridWithFilters projects={projects} />;
+  }
 
   return (
     <div className="space-y-8">
-      {enableFilters ? (
-        <ProjectFilter active={activeFilter} onChange={setActiveFilter} />
-      ) : null}
-      {visibleProjects.length ? (
+      {projects.length ? (
         <div className="grid gap-6 lg:grid-cols-2">
-          {visibleProjects.map((project) => (
+          {projects.map((project) => (
             <ProjectCard key={project.slug} project={project} />
           ))}
         </div>

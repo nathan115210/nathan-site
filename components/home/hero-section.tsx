@@ -12,7 +12,7 @@ export function HeroSection() {
       <PageContainer>
         <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
           <div className="max-w-4xl">
-            <h1 className="text-balance mt-6 text-5xl text-text-primary sm:text-6xl lg:text-[6.5rem]">
+            <h1 className="text-balance mt-6 font-sans text-5xl text-text-primary sm:text-6xl lg:text-[6.5rem]">
               {siteConfig.title}
             </h1>
             <p className="mt-6 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">

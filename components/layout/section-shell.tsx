@@ -25,7 +25,7 @@ export function SectionShell({
     <section
       id={id}
       className={cn(
-        "py-[var(--section-space)] first:pt-24 sm:first:pt-28",
+        "deferred-section py-[var(--section-space)] first:pt-24 sm:first:pt-28",
         className,
       )}
     >
