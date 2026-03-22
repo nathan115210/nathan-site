@@ -48,18 +48,18 @@
     background-color: rgb(var(--bg-primary));
     background-image: radial-gradient(
         circle at top left,
-        rgba(var(--accent-soft), 0.14),
+        rgb(var(--accent-soft) / 0.14),
         transparent 28%
       ),
       radial-gradient(
         circle at top right,
-        rgba(var(--grid-color), 0.04),
+        rgb(var(--grid-color) / 0.04),
         transparent 24%
       ),
       linear-gradient(
         180deg,
-        rgba(var(--bg-secondary), 0.98),
-        rgba(var(--bg-primary), 1)
+        rgb(var(--bg-secondary) / 0.98),
+        rgb(var(--bg-primary) / 1)
       );
     color: rgb(var(--text-primary));
     font-feature-settings:
@@ -75,10 +75,10 @@
     inset: 0;
     pointer-events: none;
     background-image: linear-gradient(
-        rgba(var(--grid-color), 0.03) 1px,
+        rgb(var(--grid-color) / 0.03) 1px,
         transparent 1px
       ),
-      linear-gradient(90deg, rgba(var(--grid-color), 0.03) 1px, transparent 1px);
+      linear-gradient(90deg, rgb(var(--grid-color) / 0.03) 1px, transparent 1px);
     background-size: 120px 120px;
     mask-image: radial-gradient(circle at center, black 35%, transparent 85%);
     opacity: 0.4;
@@ -97,7 +97,7 @@
   }
 
   ::selection {
-    background: rgba(var(--accent-soft), 0.32);
+    background: rgb(var(--accent-soft) / 0.32);
     color: rgb(var(--text-primary));
   }
 
@@ -147,80 +147,84 @@
   .surface-panel {
     background: linear-gradient(
       180deg,
-      rgba(var(--surface-float), 0.74),
-      rgba(var(--surface-elevated), 0.92)
+      rgb(var(--surface-float) / 0.74),
+      rgb(var(--surface-elevated) / 0.92)
     );
-    border: 1px solid rgba(var(--border-subtle), 0.12);
+    border: 1px solid rgb(var(--border-subtle) / 0.12);
     box-shadow:
-      0 24px 64px rgba(var(--shadow-color), 0.42),
-      inset 0 1px 0 rgba(var(--border-strong), 0.08);
+      0 24px 64px rgb(var(--shadow-color) / 0.42),
+      inset 0 1px 0 rgb(var(--border-strong) / 0.08);
     backdrop-filter: blur(18px);
   }
 
   .liquid-glass {
     position: relative;
     overflow: hidden;
+    /* Transparent enough for backdrop-filter to show through */
     background: linear-gradient(
-        135deg,
-        rgba(255, 255, 255, 0.12),
-        rgba(18, 18, 18, 0.88) 26%,
-        rgba(8, 8, 8, 0.94) 64%,
-        rgba(0, 0, 0, 0.96)
+        160deg,
+        rgb(var(--grid-color) / 0.07) 0%,
+        rgb(var(--bg-secondary) / 0.52) 40%,
+        rgb(var(--bg-primary) / 0.64) 100%
       ),
       radial-gradient(
-        circle at top left,
-        rgba(var(--accent-soft), 0.12),
-        transparent 34%
+        ellipse at 18% 0%,
+        rgb(var(--accent-soft) / 0.13),
+        transparent 55%
       ),
       radial-gradient(
-        circle at 85% 20%,
-        rgba(255, 255, 255, 0.12),
-        transparent 24%
+        ellipse at 82% 100%,
+        rgb(var(--accent-soft) / 0.07),
+        transparent 50%
       );
-    border: 1px solid rgba(var(--border-strong), 0.18);
+    border: 1px solid rgb(var(--border-strong) / 0.22);
     box-shadow:
-      0 28px 70px rgba(var(--shadow-color), 0.36),
-      inset 0 1px 0 rgba(var(--grid-color), 0.24),
-      inset 0 -1px 0 rgba(var(--shadow-color), 0.18);
-    backdrop-filter: blur(24px) saturate(145%);
-    -webkit-backdrop-filter: blur(24px) saturate(145%);
+      0 32px 80px rgb(var(--shadow-color) / 0.52),
+      /* top specular edge — the "glass rim" */ inset 0 1.5px 0
+        rgb(var(--grid-color) / 0.38),
+      /* bottom inner shadow */ inset 0 -1px 0 rgb(var(--shadow-color) / 0.3),
+      /* left edge glint */ inset 1px 0 0 rgb(var(--grid-color) / 0.1),
+      /* right edge shadow */ inset -1px 0 0 rgb(var(--shadow-color) / 0.14);
+    backdrop-filter: blur(42px) saturate(180%) brightness(1.05);
+    -webkit-backdrop-filter: blur(42px) saturate(180%) brightness(1.05);
   }
 
+  /* Top specular highlight — the bright line across the glass rim */
   .liquid-glass::before {
     content: "";
     position: absolute;
-    inset: 1px;
-    border-radius: inherit;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
     background: linear-gradient(
-        180deg,
-        rgba(var(--grid-color), 0.16),
-        transparent 26%
-      ),
-      radial-gradient(
-        circle at top,
-        rgba(var(--grid-color), 0.18),
-        transparent 38%
-      );
-    opacity: 0.9;
-    z-index: 0;
+      90deg,
+      transparent 0%,
+      rgb(var(--grid-color) / 0.55) 25%,
+      rgb(var(--grid-color) / 0.8) 50%,
+      rgb(var(--grid-color) / 0.55) 75%,
+      transparent 100%
+    );
+    z-index: 2;
     pointer-events: none;
   }
 
+  /* Interior caustic glow — the soft light bloom inside the glass */
   .liquid-glass::after {
     content: "";
     position: absolute;
-    inset: auto -12% -42% 38%;
-    height: 88%;
-    border-radius: 999px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(var(--grid-color), 0.18),
-      transparent
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 60%;
+    background: radial-gradient(
+      ellipse at center,
+      rgb(var(--grid-color) / 0.09) 0%,
+      rgb(var(--accent-soft) / 0.04) 50%,
+      transparent 75%
     );
-    transform: rotate(-14deg);
-    filter: blur(12px);
-    opacity: 0.7;
+    filter: blur(26px);
     z-index: 0;
     pointer-events: none;
   }
@@ -236,7 +240,7 @@
   }
 
   .surface-outline {
-    border: 1px solid rgba(var(--border-strong), 0.16);
+    border: 1px solid rgb(var(--border-strong) / 0.16);
   }
 
   .eyebrow {
@@ -256,7 +260,7 @@
     position: absolute;
     inset: 0;
     border-radius: calc(var(--radius-panel) + 0.25rem);
-    border: 1px solid rgba(var(--border-subtle), 0.08);
+    border: 1px solid rgb(var(--border-subtle) / 0.08);
     pointer-events: none;
   }
 }

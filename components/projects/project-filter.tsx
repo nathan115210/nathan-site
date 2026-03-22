@@ -13,15 +13,15 @@ const filters: ProjectCategory[] = [
 
 type ProjectFilterProps = {
   active: ProjectCategory;
-  onChange: (category: ProjectCategory) => void;
+  onChange: (_category: ProjectCategory) => void;
 };
 
 export function ProjectFilter({ active, onChange }: ProjectFilterProps) {
   return (
     <div className="flex flex-wrap gap-3">
-      {filters.map((filter) => (
+      {filters.map((filter, index) => (
         <button
-          key={filter}
+          key={`${filter}-${index}`}
           type="button"
           onClick={() => onChange(filter)}
           className={cn(

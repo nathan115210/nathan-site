@@ -1,6 +1,5 @@
 import { siteConfig } from "@/data/site";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { PageContainer } from "@/components/layout/page-container";
 
 export function HeroSection() {

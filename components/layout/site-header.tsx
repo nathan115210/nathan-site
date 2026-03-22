@@ -24,6 +24,8 @@ export function SiteHeader() {
                   <Link
                     key={item.href}
                     href={item.href}
+                    target={isExternalLink(item.href) ? "_blank" : undefined}
+                    rel={isExternalLink(item.href) ? "noreferrer" : undefined}
                     className="flex adaptive-ink rounded-full border border-transparent py-1 font-mono text-[0.72rem] uppercase tracking-[0.16em] transition hover:border-border-strong/12 hover:bg-white/5 hover:opacity-80 items-center"
                   >
                     {item.label}

@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 
 type SocialLinksProps = {
@@ -13,9 +14,10 @@ export function SocialLinks({ links }: SocialLinksProps) {
           href={link.href}
           target="_blank"
           rel="noreferrer"
-          className="font-mono uppercase tracking-[0.16em] text-[0.72rem] transition hover:text-accent-hover"
+          className="font-mono uppercase tracking-[0.16em] text-[0.72rem] transition hover:text-accent-hover flex items-center"
         >
-          {link.label}
+          {link.label}{" "}
+          <ExternalLink className="ml-1 text-xs opacity-70" size={12} />
         </Link>
       ))}
     </div>

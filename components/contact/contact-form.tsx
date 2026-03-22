@@ -74,10 +74,7 @@ export function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formState,
-          website: "",
-        }),
+        body: JSON.stringify(formState),
       });
 
       const body = (await response.json()) as { error?: string };

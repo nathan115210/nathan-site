@@ -7,14 +7,18 @@ import { PageContainer } from "@/components/layout/page-container";
 import { ProjectHero } from "@/components/projects/project-hero";
 import { CaseStudySection } from "@/components/projects/case-study-section";
 import { Card } from "@/components/ui/card";
-import { Link } from "lucide-react";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = getProjectBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return createMetadata({
@@ -30,12 +34,13 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   });
 }
 
-export default function ProjectDetailPage({
+export default async function ProjectDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = getProjectBySlug(params.slug);
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
@@ -68,8 +73,7 @@ export default function ProjectDetailPage({
           <CaseStudySection title="Challenges" items={project.challenges} />
           <CaseStudySection title="Solutions" items={project.solutions} />
         </div>
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <CaseStudySection title="Outcome" items={project.outcome} />
+        <div className="mt-6">
           <Card>
             <p className="eyebrow">Learning</p>
             <h2 className="mt-4 text-3xl text-text-primary">

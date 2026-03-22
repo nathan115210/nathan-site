@@ -60,7 +60,7 @@ export function AboutSection() {
             {services.slice(0, 3).map((service) => (
               <div
                 key={service.title}
-                className="relative space-y-3 px-5 py-5 rounded-[1.5rem] bg-bg-secondary/80 p-4"
+                className="relative space-y-3 px-5 py-5 rounded-[1.5rem] bg-bg-secondary/80"
               >
                 <p className="font-medium text-text-primary">{service.title}</p>
                 <p className=" text-sm text-text-secondary">

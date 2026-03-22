@@ -4,27 +4,29 @@ import { siteConfig } from "@/data/site";
 
 export const runtime = "nodejs";
 
+const isDev = process.env.NODE_ENV !== "production";
+
 type ContactPayload = {
   name?: string;
   email?: string;
   message?: string;
 };
 
+type ValidatedPayload = {
+  name: string;
+  email: string;
+  message: string;
+};
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function isDevelopmentEnvironment() {
-  return process.env.NODE_ENV !== "production";
-}
-
 function isPlaceholderSmtpValue(value: string | undefined) {
-  if (!value) {
-    return false;
-  }
-
+  if (!value) return false;
   const normalized = value.trim().toLowerCase();
   return (
     normalized.includes("example.com") ||
     normalized.includes("your_smtp_") ||
+    normalized.includes("replace_with") ||
     normalized.includes("changeme")
   );
 }
@@ -34,7 +36,6 @@ function shouldFallbackToTestTransport(error: unknown) {
     typeof error === "object" && error !== null && "code" in error
       ? String((error as { code?: string }).code)
       : "";
-
   return ["ENOTFOUND", "ECONNREFUSED", "ETIMEDOUT", "EAUTH"].includes(code);
 }
 
@@ -47,11 +48,13 @@ function escapeHtml(input: string): string {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/\"/g, "&quot;")
+    .replace(/"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
-function validatePayload(payload: ContactPayload) {
+function validatePayload(
+  payload: ContactPayload,
+): { error: string } | ValidatedPayload {
   const name = normalize(payload.name);
   const email = normalize(payload.email);
   const message = normalize(payload.message);
@@ -59,25 +62,27 @@ function validatePayload(payload: ContactPayload) {
   if (!name || !email || !message) {
     return { error: "Please complete all required fields." };
   }
-
   if (name.length > 120) {
     return { error: "Name is too long." };
   }
-
   if (!EMAIL_REGEX.test(email)) {
     return { error: "Please enter a valid email address." };
   }
-
   if (message.length < 10 || message.length > 5000) {
-    return {
-      error: "Message should be between 10 and 5000 characters.",
-    };
+    return { error: "Message should be between 10 and 5000 characters." };
   }
 
   return { name, email, message };
 }
 
-function getSmtpConfig() {
+function getSmtpConfig():
+  | { error: string }
+  | {
+      host: string;
+      port: number;
+      auth: { user: string; pass: string };
+      secure: boolean;
+    } {
   const host = process.env.SMTP_HOST?.trim();
   const portRaw = process.env.SMTP_PORT?.trim();
   const user = process.env.SMTP_USER?.trim();
@@ -91,69 +96,86 @@ function getSmtpConfig() {
   }
 
   const port = Number(portRaw);
-
   if (!Number.isInteger(port) || port <= 0) {
     return { error: "SMTP_PORT is invalid." };
   }
 
+  return { host, port, auth: { user, pass }, secure: port === 465 };
+}
+
+function buildMailOptions(
+  to: string,
+  from: string,
+  validated: ValidatedPayload,
+) {
+  const safeName = escapeHtml(validated.name);
+  const safeEmail = escapeHtml(validated.email);
+  const safeMessage = escapeHtml(validated.message).replace(/\n/g, "<br/>");
+
   return {
-    host,
-    port,
-    auth: { user, pass },
-    secure: port === 465,
+    to,
+    from,
+    replyTo: validated.email,
+    subject: `Portfolio contact: ${validated.name}`,
+    text: [
+      `Name: ${validated.name}`,
+      `Email: ${validated.email}`,
+      "",
+      "Message:",
+      validated.message,
+    ].join("\n"),
+    html: `
+      <p><strong>Name:</strong> ${safeName}</p>
+      <p><strong>Email:</strong> ${safeEmail}</p>
+      <p><strong>Message:</strong></p>
+      <p>${safeMessage}</p>
+    `,
   };
 }
 
-async function createTransporter(options?: { forceTestTransport?: boolean }) {
-  if (options?.forceTestTransport && isDevelopmentEnvironment()) {
-    const testAccount = await nodemailer.createTestAccount();
-    const transporter = nodemailer.createTransport({
+async function createEtherealTransport() {
+  const testAccount = await nodemailer.createTestAccount();
+  return {
+    transporter: nodemailer.createTransport({
       host: "smtp.ethereal.email",
       port: 587,
       secure: false,
-      auth: {
-        user: testAccount.user,
-        pass: testAccount.pass,
-      },
-    });
-
-    const from =
+      auth: { user: testAccount.user, pass: testAccount.pass },
+    }),
+    from:
       process.env.CONTACT_FROM_EMAIL?.trim() ||
-      `Portfolio Contact <${testAccount.user}>`;
+      `Portfolio Contact <${testAccount.user}>`,
+    isTestTransport: true as const,
+  };
+}
 
-    return {
-      transporter,
-      from,
-      isTestTransport: true,
-    };
-  }
-
+async function createTransporter() {
   const smtpConfig = getSmtpConfig();
-  if (
-    !("error" in smtpConfig) &&
-    !(
-      isDevelopmentEnvironment() &&
+
+  if (!("error" in smtpConfig)) {
+    const hasPlaceholders =
+      isDev &&
       (isPlaceholderSmtpValue(smtpConfig.host) ||
         isPlaceholderSmtpValue(smtpConfig.auth.user) ||
-        isPlaceholderSmtpValue(smtpConfig.auth.pass))
-    )
-  ) {
-    const from =
-      process.env.CONTACT_FROM_EMAIL?.trim() ||
-      `Portfolio Contact <${smtpConfig.auth.user}>`;
+        isPlaceholderSmtpValue(smtpConfig.auth.pass));
 
-    return {
-      transporter: nodemailer.createTransport(smtpConfig),
-      from,
-      isTestTransport: false,
-    };
+    if (!hasPlaceholders) {
+      const from =
+        process.env.CONTACT_FROM_EMAIL?.trim() ||
+        `Portfolio Contact <${smtpConfig.auth.user}>`;
+      return {
+        transporter: nodemailer.createTransport(smtpConfig),
+        from,
+        isTestTransport: false as const,
+      };
+    }
   }
 
-  if (isDevelopmentEnvironment()) {
-    return createTransporter({ forceTestTransport: true });
+  if (isDev) {
+    return createEtherealTransport();
   }
 
-  throw new Error(smtpConfig.error);
+  throw new Error("error" in smtpConfig ? smtpConfig.error : "SMTP misconfigured.");
 }
 
 export async function POST(req: Request) {
@@ -167,36 +189,12 @@ export async function POST(req: Request) {
 
     const to = process.env.CONTACT_TO_EMAIL?.trim() || siteConfig.email;
     let { transporter, from, isTestTransport } = await createTransporter();
-    const safeName = escapeHtml(validated.name);
-    const safeEmail = escapeHtml(validated.email);
-    const safeMessage = escapeHtml(validated.message).replace(/\n/g, "<br/>");
 
     let info;
     try {
-      info = await transporter.sendMail({
-        to,
-        from,
-        replyTo: validated.email,
-        subject: `Portfolio contact: ${validated.name}`,
-        text: [
-          `Name: ${validated.name}`,
-          `Email: ${validated.email}`,
-          "",
-          "Message:",
-          validated.message,
-        ].join("\n"),
-        html: `
-          <p><strong>Name:</strong> ${safeName}</p>
-          <p><strong>Email:</strong> ${safeEmail}</p>
-          <p><strong>Message:</strong></p>
-          <p>${safeMessage}</p>
-        `,
-      });
+      info = await transporter.sendMail(buildMailOptions(to, from, validated));
     } catch (error) {
-      if (
-        !isDevelopmentEnvironment() ||
-        !shouldFallbackToTestTransport(error)
-      ) {
+      if (!isDev || !shouldFallbackToTestTransport(error)) {
         throw error;
       }
 
@@ -205,32 +203,8 @@ export async function POST(req: Request) {
         error,
       );
 
-      const fallbackTransport = await createTransporter({
-        forceTestTransport: true,
-      });
-      transporter = fallbackTransport.transporter;
-      from = fallbackTransport.from;
-      isTestTransport = fallbackTransport.isTestTransport;
-
-      info = await transporter.sendMail({
-        to,
-        from,
-        replyTo: validated.email,
-        subject: `Portfolio contact: ${validated.name}`,
-        text: [
-          `Name: ${validated.name}`,
-          `Email: ${validated.email}`,
-          "",
-          "Message:",
-          validated.message,
-        ].join("\n"),
-        html: `
-          <p><strong>Name:</strong> ${safeName}</p>
-          <p><strong>Email:</strong> ${safeEmail}</p>
-          <p><strong>Message:</strong></p>
-          <p>${safeMessage}</p>
-        `,
-      });
+      ({ transporter, from, isTestTransport } = await createEtherealTransport());
+      info = await transporter.sendMail(buildMailOptions(to, from, validated));
     }
 
     if (isTestTransport) {
@@ -242,20 +216,13 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Contact form send failed", error);
 
-    if (isDevelopmentEnvironment()) {
-      return NextResponse.json(
-        {
-          error:
-            error instanceof Error
-              ? error.message
-              : "Unable to send your message right now. Please try again.",
-        },
-        { status: 500 },
-      );
-    }
-
     return NextResponse.json(
-      { error: "Unable to send your message right now. Please try again." },
+      {
+        error:
+          isDev && error instanceof Error
+            ? error.message
+            : "Unable to send your message right now. Please try again.",
+      },
       { status: 500 },
     );
   }
