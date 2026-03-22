@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Hongyu Zhao",
   title: "Senior Developer",
   location: "Helsinki, Finland",
-  email: process.env.EMAIL_ADDRESS || "hello@zhaohongyu.dev",
+  email: process.env.EMAIL_ADDRESS || "zhaohongyu115210@gmail.com",
   description:
     "Passionate about  developing web and mobile applications with a strong emphasis on quality, maintainability, and continuous improvement. With 8+ years of experience in software development, I’m driven by a genuine passion for learning and innovation. Throughout my career, I’ve collaborated on digital products, improved code quality through optimization, and tackled technical challenges with proactive, thoughtful problem-solving.",
   githubUrl: "https://github.com/nathan115210",

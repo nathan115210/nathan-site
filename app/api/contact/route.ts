@@ -175,7 +175,9 @@ async function createTransporter() {
     return createEtherealTransport();
   }
 
-  throw new Error("error" in smtpConfig ? smtpConfig.error : "SMTP misconfigured.");
+  throw new Error(
+    "error" in smtpConfig ? smtpConfig.error : "SMTP misconfigured.",
+  );
 }
 
 export async function POST(req: Request) {
@@ -203,7 +205,8 @@ export async function POST(req: Request) {
         error,
       );
 
-      ({ transporter, from, isTestTransport } = await createEtherealTransport());
+      ({ transporter, from, isTestTransport } =
+        await createEtherealTransport());
       info = await transporter.sendMail(buildMailOptions(to, from, validated));
     }
 
