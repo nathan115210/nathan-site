@@ -1,17 +1,8 @@
-"use client";
+import Desktop from "@/components/desktop/desktop";
+import { createMetadata } from "@/lib/seo";
 
-import About from "@/components/About";
-import Hero from "@/components/Hero";
-import Skills from "@/components/Skills";
-import { Career } from "@/components/Career";
+export const metadata = createMetadata();
 
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <About />
-      <Skills />
-      <Career />
-    </>
-  );
+export default function HomePage() {
+  return <Desktop />;
 }

@@ -1,0 +1,24 @@
+import nextJest from "next/jest.js";
+import type { Config } from "jest";
+
+const createJestConfig = nextJest({
+  dir: "./",
+});
+
+const config: Config = {
+  clearMocks: true,
+  collectCoverageFrom: [
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
+    "app/**/*.{ts,tsx}",
+    "!**/*.d.ts",
+    "!app/layout.tsx",
+  ],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
+  },
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  testEnvironment: "jest-environment-jsdom",
+};
+
+export default createJestConfig(config);
