@@ -1,20 +1,18 @@
-import { Fraunces, IBM_Plex_Mono, Sora } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono, Sora } from "next/font/google";
 import "./globals.css";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { SiteHeader } from "@/components/layout/site-header";
 import { createMetadata } from "@/lib/seo";
 
 const sora = Sora({
   subsets: ["latin"],
   variable: "--font-sans",
-  display: "optional",
+  display: "swap",
 });
 
-const fraunces = Fraunces({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-display",
-  preload: false,
-  display: "optional",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -35,13 +33,9 @@ export default function RootLayout({
   return (
     <html lang="en" data-scroll-behavior="smooth">
       <body
-        className={`${sora.variable} ${fraunces.variable} ${ibmPlexMono.variable}`}
+        className={`${sora.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable}`}
       >
-        <div className="min-h-screen bg-bg-primary text-text-primary">
-          <SiteHeader />
-          <main className="relative overflow-hidden">{children}</main>
-          <SiteFooter />
-        </div>
+        {children}
       </body>
     </html>
   );

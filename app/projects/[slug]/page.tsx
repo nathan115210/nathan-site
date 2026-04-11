@@ -50,7 +50,7 @@ export default async function ProjectDetailPage({
     <section className="pb-20 pt-16 sm:pb-24 sm:pt-20 lg:pb-28 lg:pt-24">
       <PageContainer>
         <ProjectHero project={project} />
-        <div className="surface-panel mt-10 overflow-hidden rounded-[2rem] border border-border-strong/12">
+        <div className="mt-10 overflow-hidden rounded-xl border border-text-primary/10 bg-bg-secondary">
           <div className="relative aspect-[16/9] bg-bg-secondary">
             <Image
               src={project.image}
@@ -83,7 +83,7 @@ export default async function ProjectDetailPage({
               {project.learnings.map((learning) => (
                 <li
                   key={learning}
-                  className="border-l border-accent-primary/25 pl-4 leading-7"
+                  className="border-l-2 border-accent-primary pl-4 leading-7"
                 >
                   {learning}
                 </li>

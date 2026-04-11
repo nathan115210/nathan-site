@@ -107,7 +107,7 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} className="mt-8 space-y-4" noValidate>
       <label className="block">
-        <span className="mb-2 block font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">
           Name
         </span>
         <input
@@ -129,7 +129,7 @@ export function ContactForm() {
               ? "contact-name-error"
               : undefined
           }
-          className="w-full rounded-2xl border border-border-strong/12 bg-bg-secondary/60 px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary/30"
+          className="w-full rounded-lg border border-text-primary/15 bg-bg-secondary px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20"
           placeholder="Your name"
           autoComplete="name"
         />
@@ -143,7 +143,7 @@ export function ContactForm() {
         ) : null}
       </label>
       <label className="block">
-        <span className="mb-2 block font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">
           Email
         </span>
         <input
@@ -164,7 +164,7 @@ export function ContactForm() {
               ? "contact-email-error"
               : undefined
           }
-          className="w-full rounded-2xl border border-border-strong/12 bg-bg-secondary/60 px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary/30"
+          className="w-full rounded-lg border border-text-primary/15 bg-bg-secondary px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20"
           placeholder="you@example.com"
           autoComplete="email"
         />
@@ -178,7 +178,7 @@ export function ContactForm() {
         ) : null}
       </label>
       <label className="block">
-        <span className="mb-2 block font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+        <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.08em] text-text-muted">
           Message
         </span>
         <textarea
@@ -205,7 +205,7 @@ export function ContactForm() {
               ? "contact-message-error"
               : undefined
           }
-          className="w-full rounded-2xl border border-border-strong/12 bg-bg-secondary/60 px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary/30"
+          className="w-full rounded-lg border border-text-primary/15 bg-bg-secondary px-4 py-3 text-text-primary outline-none transition focus:border-accent-primary focus:ring-2 focus:ring-accent-primary/20"
           placeholder="A few lines on the team, the product, and what kind of help you need."
         />
         {messageError && (hasSubmitted || touched.message) ? (

@@ -62,26 +62,26 @@ export default function AboutPage() {
         description="The through-line in my work is building better products through collaboration, software quality, and solution-oriented engineering decisions."
       >
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <Card className="rounded-[2rem] p-8">
+          <Card className="p-8">
             <p className="eyebrow">Approach</p>
             <ul className="mt-5 space-y-4 text-base leading-7 text-text-secondary">
               {proofPoints.map((point) => (
                 <li
                   key={point}
-                  className="border-l border-accent-primary/25 pl-4"
+                  className="border-l-2 border-accent-primary pl-4"
                 >
                   {point}
                 </li>
               ))}
             </ul>
           </Card>
-          <Card className="rounded-[2rem] p-8">
+          <Card className="p-8">
             <p className="eyebrow">Services</p>
-            <div className="mt-5 space-y-4">
+            <div className="mt-5 space-y-3">
               {services.map((service) => (
                 <div
                   key={service.title}
-                  className="rounded-2xl border border-border-strong/12 bg-bg-secondary/50 p-4"
+                  className="rounded-lg border border-text-primary/10 bg-bg-tertiary p-4"
                 >
                   <h2 className="text-2xl text-text-primary">
                     {service.title}
@@ -102,12 +102,12 @@ export default function AboutPage() {
       >
         <div className="grid grid-cols-1 gap-6">
           {experienceByCompany.map((group) => (
-            <Card key={group.company} className="rounded-[2rem] p-8">
+            <Card key={group.company} className="p-8">
               <p className="eyebrow">{group.company}</p>
               <div
                 className={`mt-6 space-y-8 ${
                   group.items.length > 1
-                    ? "border-l border-accent-primary/25 pl-6"
+                    ? "border-l-2 border-accent-primary pl-6"
                     : ""
                 }`}
               >
@@ -117,9 +117,9 @@ export default function AboutPage() {
                     className="relative"
                   >
                     {group.items.length > 1 ? (
-                      <span className="absolute -left-[1.66rem] top-2 h-2.5 w-2.5 rounded-full bg-accent-primary/70 ring-4 ring-accent-primary/10" />
+                      <span className="absolute -left-[1.66rem] top-2 h-2.5 w-2.5 rounded-full bg-accent-primary ring-4 ring-accent-primary/20" />
                     ) : null}
-                    <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+                    <p className="text-xs font-semibold uppercase tracking-[0.1em] text-text-muted">
                       {item.period}
                     </p>
                     <h2 className="mt-2 text-3xl text-text-primary">
@@ -134,7 +134,7 @@ export default function AboutPage() {
                       {item.bullets.map((bullet) => (
                         <li
                           key={bullet}
-                          className="border-l border-accent-primary/25 pl-4"
+                          className="border-l-2 border-accent-primary pl-4"
                         >
                           {bullet}
                         </li>

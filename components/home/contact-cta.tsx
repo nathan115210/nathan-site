@@ -1,53 +1,69 @@
 import { siteConfig } from "@/data/site";
-import { SectionShell } from "@/components/layout/section-shell";
+import { PageContainer } from "@/components/layout/page-container";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { ExternalLink } from "lucide-react";
 
 export function ContactCta() {
   return (
-    <SectionShell id="contact" className="pt-6 sm:pt-10 lg:pt-12">
-      <Card className="rounded-[2rem] px-6 py-10 sm:px-10">
-        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+    <section
+      id="contact"
+      className="bg-[rgb(var(--bg-dark))] py-24 text-[rgb(var(--text-on-dark))]"
+    >
+      <PageContainer>
+        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <div className="max-w-2xl">
-            <p className="eyebrow">Contact</p>
-            <h2 className="mt-4 text-balance text-4xl text-text-primary sm:text-5xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
+              Contact
+            </p>
+            <h2 className="mt-4 text-balance text-4xl text-white sm:text-5xl">
               Interested in working together?
             </h2>
-            <p className="mt-5 text-base leading-7 text-text-secondary sm:text-lg">
+            <p className="mt-5 text-base leading-7 text-white/70 sm:text-lg">
               Whether you&apos;re hiring for a senior software role or exploring
               web and mobile product work, I&apos;d be glad to talk through the
               product, the team, and the engineering needs.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <Button href="/contact">Open contact page</Button>
-              <Button href={`mailto:${siteConfig.email}`} variant="secondary">
+              <Button
+                href={`mailto:${siteConfig.email}`}
+                variant="secondary"
+                className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:border-white/30"
+              >
                 Email directly
               </Button>
             </div>
           </div>
-          <div className="rounded-[1.75rem] border border-border-strong/12 bg-bg-secondary/55 p-6">
-            <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+
+          <div className="rounded-xl border border-white/10 bg-white/5 p-6">
+            <p className="text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
               Preferred work
             </p>
-            <ul className="mt-4 space-y-3 text-sm leading-6 text-text-secondary">
+            <ul className="mt-4 space-y-3 text-sm leading-7 text-white/70">
               <li>Senior software roles with strong product ownership</li>
               <li>Web and mobile product development with quality focus</li>
               <li>Selective consulting work with clear delivery scope</li>
             </ul>
             <div className="mt-6 flex flex-wrap gap-4">
-              <Button href={siteConfig.githubUrl} variant="ghost">
+              <Button
+                href={siteConfig.githubUrl}
+                variant="ghost"
+                className="text-white/60 hover:text-white"
+              >
                 View GitHub{" "}
-                <ExternalLink className="ml-1 text-xs opacity-70" size={12} />
+                <ExternalLink className="ml-1 opacity-70" size={12} />
               </Button>
-              <Button href={siteConfig.linkedinUrl} variant="ghost">
-                LinkedIn{" "}
-                <ExternalLink className="ml-1 text-xs opacity-70" size={12} />
+              <Button
+                href={siteConfig.linkedinUrl}
+                variant="ghost"
+                className="text-white/60 hover:text-white"
+              >
+                LinkedIn <ExternalLink className="ml-1 opacity-70" size={12} />
               </Button>
             </div>
           </div>
         </div>
-      </Card>
-    </SectionShell>
+      </PageContainer>
+    </section>
   );
 }

@@ -6,14 +6,16 @@ export function SiteFooter() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-white/10 py-10">
+    <footer className="border-t border-text-primary/10 bg-bg-primary py-10">
       <PageContainer className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-medium text-zinc-200">{siteConfig.name}</p>
-          <p className="mt-1 text-sm text-zinc-500">
+          <p className="text-sm font-bold text-text-primary">
+            {siteConfig.name}
+          </p>
+          <p className="mt-1 text-sm text-text-secondary">
             Building modern, maintainable digital products.
           </p>
-          <p className="mt-2 text-xs uppercase tracking-[0.14em] text-zinc-600">
+          <p className="mt-2 text-xs uppercase tracking-[0.1em] text-text-muted">
             Copyright {currentYear} {siteConfig.name}. All rights reserved.
           </p>
         </div>

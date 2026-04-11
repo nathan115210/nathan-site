@@ -1,162 +1,92 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { Menu, X } from "lucide-react";
 import { navItems, siteConfig } from "@/data/site";
 import { PageContainer } from "@/components/layout/page-container";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/cn";
 import { isExternalLink } from "@/lib/utils";
-import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react";
+
+const mainNavItems = navItems.filter((item) =>
+  ["/", "/projects", "/about", "/contact"].includes(item.href),
+);
 
 export function SiteHeader() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const isCollapsedRef = useRef(false);
-  const lastScrollYRef = useRef(0);
-  const canAutoCollapseRef = useRef(true);
-
-  const setHeaderCollapsed = (nextIsCollapsed: boolean) => {
-    canAutoCollapseRef.current = false;
-    isCollapsedRef.current = nextIsCollapsed;
-    setIsCollapsed(nextIsCollapsed);
-  };
-
-  const toggleHeader = () => {
-    setHeaderCollapsed(!isCollapsedRef.current);
-  };
-
-  useEffect(() => {
-    const mobileBreakpoint = 1024;
-    const collapseOffset = 96;
-    const topResetOffset = 8;
-    const autoCollapseZone = 320;
-
-    const updateCollapsedState = (nextIsCollapsed: boolean) => {
-      if (isCollapsedRef.current === nextIsCollapsed) {
-        return;
-      }
-
-      isCollapsedRef.current = nextIsCollapsed;
-      setIsCollapsed(nextIsCollapsed);
-    };
-
-    const syncHeaderState = () => {
-      const currentScrollY = window.scrollY;
-      const nextIsAtTop = currentScrollY <= topResetOffset;
-
-      if (window.innerWidth >= mobileBreakpoint) {
-        lastScrollYRef.current = currentScrollY;
-        canAutoCollapseRef.current = true;
-        updateCollapsedState(false);
-        return;
-      }
-
-      const isScrollingDown = currentScrollY > lastScrollYRef.current;
-
-      if (nextIsAtTop) {
-        canAutoCollapseRef.current = true;
-        updateCollapsedState(false);
-      } else if (
-        canAutoCollapseRef.current &&
-        !isCollapsedRef.current &&
-        isScrollingDown &&
-        currentScrollY >= collapseOffset &&
-        currentScrollY <= autoCollapseZone
-      ) {
-        canAutoCollapseRef.current = false;
-        updateCollapsedState(true);
-      }
-
-      lastScrollYRef.current = currentScrollY;
-    };
-
-    syncHeaderState();
-    window.addEventListener("scroll", syncHeaderState, { passive: true });
-    window.addEventListener("resize", syncHeaderState);
-
-    return () => {
-      window.removeEventListener("scroll", syncHeaderState);
-      window.removeEventListener("resize", syncHeaderState);
-    };
-  }, []);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 pt-4">
+    <header className="sticky top-0 z-50 bg-bg-primary border-b border-text-primary/10">
       <PageContainer>
-        <div
-          className={cn(
-            "liquid-glass rounded-[2rem] px-5 sm:px-6 transition-[padding,box-shadow] duration-300 ease-editorial",
-            isCollapsed ? "py-3" : "py-4",
-          )}
-        >
-          <div
-            className={cn(
-              "liquid-glass-content flex flex-col transition-[gap] duration-300 ease-editorial lg:flex-row lg:items-center lg:justify-between",
-              isCollapsed ? "gap-0" : "gap-4",
-            )}
+        <div className="flex h-16 items-center justify-between gap-6">
+          {/* Logo */}
+          <Link href="/" className="shrink-0">
+            <span className="text-base font-bold text-text-primary tracking-tight">
+              {siteConfig.name}
+            </span>
+          </Link>
+
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {mainNavItems.map((item) => {
+              const isExternal = isExternalLink(item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-4 py-2 text-sm font-medium text-text-secondary rounded-lg hover:text-text-primary hover:bg-text-primary/5 transition-colors"
+                  target={isExternal ? "_blank" : undefined}
+                  rel={isExternal ? "noreferrer" : undefined}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex items-center gap-3 shrink-0">
+            <Button href={siteConfig.githubUrl} variant="ghost">
+              GitHub
+            </Button>
+            <Button href="/contact">Get in touch</Button>
+          </div>
+
+          {/* Mobile toggle */}
+          <button
+            className="lg:hidden p-2 -mr-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-text-primary/5 transition-colors"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-label="Toggle navigation menu"
           >
-            <div className="flex items-start justify-between gap-4 sm:items-center">
-              <Link href="/" className="min-w-0">
-                <p className="adaptive-ink mt-2 text-lg font-semibold sm:text-xl">
-                  {siteConfig.name}
-                </p>
-              </Link>
-              <button
-                type="button"
-                aria-label={
-                  isCollapsed ? "Expand site header" : "Collapse site header"
-                }
-                aria-expanded={!isCollapsed}
-                onClick={toggleHeader}
-                className={cn(
-                  "mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border-strong/16 bg-white/5 text-text-primary transition duration-300 ease-editorial lg:hidden",
-                  isCollapsed ? "opacity-100" : "opacity-85",
-                )}
-              >
-                {isCollapsed ? (
-                  <ChevronDown size={18} />
-                ) : (
-                  <ChevronUp size={18} />
-                )}
-              </button>
-            </div>
-            <div
-              aria-hidden={isCollapsed}
-              className={cn(
-                "flex flex-col gap-4 overflow-hidden transition-[max-height,opacity,transform,margin] duration-300 ease-editorial lg:max-h-none lg:opacity-100 lg:translate-y-0 lg:overflow-visible lg:items-end",
-                isCollapsed
-                  ? "max-h-0 -translate-y-2 opacity-0 pointer-events-none lg:pointer-events-auto"
-                  : "max-h-48 translate-y-0 opacity-100 mt-4 lg:mt-0",
-              )}
-            >
-              <nav className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                {navItems.map((item) => (
+            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+        </div>
+
+        {/* Mobile Nav */}
+        {mobileOpen && (
+          <div className="lg:hidden border-t border-text-primary/10 py-4">
+            <nav className="flex flex-col gap-1">
+              {navItems.map((item) => {
+                const isExternal = isExternalLink(item.href);
+                return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    target={isExternalLink(item.href) ? "_blank" : undefined}
-                    rel={isExternalLink(item.href) ? "noreferrer" : undefined}
-                    className="flex adaptive-ink rounded-full border border-transparent py-1 font-mono text-[0.72rem] uppercase tracking-[0.16em] transition hover:border-border-strong/12 hover:bg-white/5 hover:opacity-80 items-center"
+                    className="px-2 py-2.5 text-sm font-medium text-text-secondary hover:text-text-primary rounded-lg hover:bg-text-primary/5 transition-colors"
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noreferrer" : undefined}
+                    onClick={() => setMobileOpen(false)}
                   >
                     {item.label}
-                    {isExternalLink(item.href) && (
-                      <ExternalLink
-                        className="ml-1 text-xs opacity-70"
-                        size={12}
-                      />
-                    )}
                   </Link>
-                ))}
-              </nav>
-              <div className="flex flex-wrap items-center gap-3">
-                <Button href={siteConfig.resumeUrl} variant="secondary">
-                  Resume
-                </Button>
-                <Button href="/contact">Start a conversation</Button>
-              </div>
+                );
+              })}
+            </nav>
+            <div className="mt-4 pt-4 border-t border-text-primary/10">
+              <Button href="/contact">Get in touch</Button>
             </div>
           </div>
-        </div>
+        )}
       </PageContainer>
     </header>
   );

@@ -23,7 +23,7 @@ export function CaseStudySection({
           {items.map((item) => (
             <li
               key={item}
-              className="border-l border-accent-primary/25 pl-4 leading-7"
+              className="border-l-2 border-accent-primary pl-4 leading-7"
             >
               {item}
             </li>

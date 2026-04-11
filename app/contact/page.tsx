@@ -41,7 +41,7 @@ export default function ContactPage() {
               </Button>
             </div>
           </div>
-          <Card className="rounded-[2rem] p-6 sm:p-8">
+          <Card className="p-6 sm:p-8">
             <h2 className="mt-4 text-3xl text-text-primary">
               Share the shape of the work.
             </h2>

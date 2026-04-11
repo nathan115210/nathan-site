@@ -14,7 +14,7 @@ export function SocialLinks({ links }: SocialLinksProps) {
           href={link.href}
           target="_blank"
           rel="noreferrer"
-          className="font-mono uppercase tracking-[0.16em] text-[0.72rem] transition hover:text-accent-hover flex items-center"
+          className="text-xs font-semibold uppercase tracking-[0.1em] text-text-secondary transition hover:text-text-primary flex items-center"
         >
           {link.label}{" "}
           <ExternalLink className="ml-1 text-xs opacity-70" size={12} />

@@ -6,26 +6,49 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative overflow-hidden pb-10 pt-16 sm:pb-14 sm:pt-20 lg:pb-20 lg:pt-24"
+      className="border-b border-text-primary/10 py-24 lg:py-32"
     >
-      <div className="absolute inset-x-0 top-0 -z-10 h-[42rem] bg-[radial-gradient(circle_at_top_left,rgba(211,162,96,0.22),transparent_38%),radial-gradient(circle_at_top_right,rgba(255,241,219,0.08),transparent_28%),linear-gradient(180deg,rgba(24,20,16,0.82),transparent)]" />
       <PageContainer>
-        <div className="grid gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
-          <div className="max-w-4xl">
-            <h1 className="text-balance mt-6 font-sans text-5xl text-text-primary sm:text-6xl lg:text-[6.5rem]">
-              {siteConfig.title}
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-7 text-text-secondary sm:text-lg">
-              {siteConfig.description}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/projects">Explore Projects</Button>
-              <Button href="/about" variant="secondary">
-                More About Me
-              </Button>
-            </div>
+        <div className="max-w-3xl">
+          <p className="eyebrow mb-5">
+            Available for senior software roles &middot; {siteConfig.location}
+          </p>
+          <h1 className="text-5xl text-text-primary sm:text-6xl lg:text-[5.5rem] leading-[1.05]">
+            {siteConfig.title}
+          </h1>
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-text-secondary">
+            {siteConfig.description}
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <Button href="/projects">Explore Projects</Button>
+            <Button href="/about" variant="secondary">
+              More About Me
+            </Button>
           </div>
         </div>
+
+        {/* Stats row */}
+        <dl className="mt-16 grid grid-cols-2 gap-x-10 gap-y-6 border-t border-text-primary/10 pt-10 sm:grid-cols-3 max-w-xl">
+          <div>
+            <dt className="eyebrow">Experience</dt>
+            <dd className="mt-2 text-3xl font-bold text-text-primary">8+</dd>
+            <dd className="mt-0.5 text-sm text-text-secondary">years</dd>
+          </div>
+          <div>
+            <dt className="eyebrow">Focus</dt>
+            <dd className="mt-2 text-2xl font-bold text-text-primary">
+              Web &amp; Mobile
+            </dd>
+            <dd className="mt-0.5 text-sm text-text-secondary">development</dd>
+          </div>
+          <div>
+            <dt className="eyebrow">Based in</dt>
+            <dd className="mt-2 text-2xl font-bold text-text-primary">
+              {siteConfig.location.split(",")[0]}
+            </dd>
+            <dd className="mt-0.5 text-sm text-text-secondary">Finland</dd>
+          </div>
+        </dl>
       </PageContainer>
     </section>
   );

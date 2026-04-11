@@ -36,16 +36,16 @@ const config: Config = {
         },
       },
       borderRadius: {
-        sm: "0.625rem",
-        md: "0.875rem",
-        lg: "1.25rem",
-        xl: "1.75rem",
-        "2xl": "2.25rem",
+        sm: "0.375rem",
+        md: "0.5rem",
+        lg: "0.75rem",
+        xl: "1rem",
+        "2xl": "1.25rem",
         "3xl": "var(--radius-panel)",
       },
       boxShadow: {
-        card: "0 24px 64px rgba(var(--shadow-color), 0.42)",
-        glow: "0 0 0 1px rgba(var(--accent-soft), 0.18), 0 20px 50px rgba(var(--accent-soft), 0.16)",
+        card: "0 1px 4px rgba(var(--shadow-color), 0.08), 0 4px 16px rgba(var(--shadow-color), 0.06)",
+        glow: "0 0 0 3px rgba(var(--accent-primary), 0.4)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

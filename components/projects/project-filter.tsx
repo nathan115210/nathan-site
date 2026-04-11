@@ -28,7 +28,7 @@ export function ProjectFilter({ active, onChange }: ProjectFilterProps) {
             "rounded-full border px-4 py-2 font-mono text-[0.72rem] uppercase tracking-[0.16em] transition duration-420 ease-editorial",
             active === filter
               ? "border-accent-primary/30 bg-accent-primary/12 text-accent-hover"
-              : "border-border-strong/12 bg-surface-elevated/45 text-text-secondary hover:border-accent-primary/20 hover:text-text-primary",
+              : "border-text-primary/15 bg-bg-secondary text-text-secondary hover:border-accent-primary/40 hover:text-text-primary",
           )}
         >
           {filter}

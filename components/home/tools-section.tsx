@@ -14,9 +14,9 @@ export function ToolsSection() {
       <div className="grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
         <div className="grid gap-6 md:grid-cols-3">
           {tools.map((group) => (
-            <Card key={group.title} className="rounded-[2rem] p-8">
+            <Card key={group.title} className="p-6">
               <p className="eyebrow">{group.title}</p>
-              <ul className="mt-5 space-y-2 text-sm leading-6 text-text-secondary">
+              <ul className="mt-4 space-y-2 text-sm leading-6 text-text-secondary">
                 {group.items.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -24,9 +24,9 @@ export function ToolsSection() {
             </Card>
           ))}
         </div>
-        <Card className="rounded-[2rem] p-8">
+        <Card className="p-6">
           <p className="eyebrow">Full skill map</p>
-          <div className="mt-6 grid gap-5 md:grid-cols-2">
+          <div className="mt-5 grid gap-5 md:grid-cols-2">
             {skillGroups.map((group) => (
               <div key={group.title}>
                 <h3 className="text-xl text-text-primary">{group.title}</h3>

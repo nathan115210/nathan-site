@@ -12,8 +12,8 @@ type ProjectCardProps = {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <Card className="group flex h-full flex-col rounded-[2rem] p-5 sm:p-6">
-      <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-2xl  bg-bg-secondary">
+    <Card className="group flex h-full flex-col p-5 sm:p-6">
+      <div className="relative mb-5 aspect-[16/10] overflow-hidden rounded-lg bg-bg-tertiary">
         <Image
           src={project.image}
           alt={project.name}

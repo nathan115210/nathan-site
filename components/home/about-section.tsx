@@ -27,7 +27,7 @@ export function AboutSection() {
       description="Driven by continuous learning, I focus on building better products through collaboration, code quality, and pragmatic problem-solving across web and mobile."
     >
       <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
-        <Card className="rounded-[2rem] p-8">
+        <Card className="p-8">
           <p className="eyebrow">How I work</p>
           <h3 className="mt-4 text-3xl text-text-primary">
             Product-focused engineering with a strong quality mindset.
@@ -48,28 +48,28 @@ export function AboutSection() {
             <li>I prefer proactive problem-solving over reactive cleanup.</li>
           </ul>
         </Card>
-        <Card className="rounded-[2rem] p-8 section-frame relative overflow-hidden sm:p-10">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(211,162,96,0.16),transparent_60%)]" />
+        <Card className="p-8 sm:p-10">
           <p className="eyebrow">Core skills</p>
           <h3 className="mt-4 text-3xl text-text-primary">
             Web and mobile capabilities that translate well across product
             needs.
           </h3>
 
-          <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-3">
             {services.slice(0, 3).map((service) => (
               <div
                 key={service.title}
-                className="relative space-y-3 px-5 py-5 rounded-[1.5rem] bg-bg-secondary/80"
+                className="space-y-2 rounded-lg border border-text-primary/10 bg-bg-tertiary px-5 py-4"
               >
-                <p className="font-medium text-text-primary">{service.title}</p>
-                <p className=" text-sm text-text-secondary">
+                <p className="font-semibold text-text-primary">
+                  {service.title}
+                </p>
+                <p className="text-sm text-text-secondary">
                   {service.description}
                 </p>
               </div>
             ))}
           </div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,rgba(211,162,96,0.16),transparent_60%)]" />
         </Card>
       </div>
       <div className="mt-6 grid grid-cols-1 gap-6">
@@ -77,12 +77,12 @@ export function AboutSection() {
           <h3 className="mt-3 text-3xl text-text-primary">Experience</h3>
         </div>
         {experienceByCompany.map((group) => (
-          <Card key={group.company} className="rounded-[2rem] p-8">
+          <Card key={group.company} className="p-8">
             <p className="eyebrow">{group.company}</p>
             <div
               className={`mt-6 space-y-6 ${
                 group.items.length > 1
-                  ? "border-l border-accent-primary/25 pl-5"
+                  ? "border-l-2 border-accent-primary pl-5"
                   : ""
               }`}
             >
@@ -92,9 +92,9 @@ export function AboutSection() {
                   className="relative"
                 >
                   {group.items.length > 1 ? (
-                    <span className="absolute -left-[1.42rem] top-2 h-2.5 w-2.5 rounded-full bg-accent-primary/70 ring-4 ring-accent-primary/10" />
+                    <span className="absolute -left-[1.45rem] top-2 h-2.5 w-2.5 rounded-full bg-accent-primary ring-4 ring-accent-primary/20" />
                   ) : null}
-                  <p className="font-mono text-[0.72rem] uppercase tracking-[0.18em] text-text-muted">
+                  <p className="text-xs font-semibold uppercase tracking-[0.1em] text-text-muted">
                     {item.period}
                   </p>
                   <h3 className="mt-2 text-2xl text-text-primary">

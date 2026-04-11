@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export function FeaturedProjects() {
   return (
     <SectionShell id="projects" title="Recent Projects">
-      <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-text-primary/10 pb-8">
         <p className="max-w-2xl text-sm leading-6 text-text-secondary">
           A curated selection of projects that showcases the product thinking
           behind each build. Spanning consumer-facing interfaces, frontend

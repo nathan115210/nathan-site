@@ -24,7 +24,7 @@ export function ProjectGrid({
           ))}
         </div>
       ) : (
-        <div className="surface-panel rounded-[2rem] px-6 py-8 text-sm text-text-secondary">
+        <div className="rounded-xl border border-text-primary/10 bg-bg-secondary px-6 py-8 text-sm text-text-secondary">
           No projects match this filter yet.
         </div>
       )}

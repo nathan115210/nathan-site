@@ -4,31 +4,33 @@
 
 @layer base {
   :root {
-    --bg-primary: 15 12 9;
-    --bg-secondary: 24 20 16;
-    --bg-tertiary: 36 30 24;
-    --surface-elevated: 30 25 20;
-    --surface-float: 43 36 29;
-    --text-primary: 244 236 223;
-    --text-secondary: 219 206 184;
-    --text-muted: 161 147 124;
-    --border-subtle: 255 244 227;
-    --border-strong: 255 232 202;
-    --accent-primary: 211 162 96;
-    --accent-hover: 233 192 138;
-    --accent-soft: 211 162 96;
-    --shadow-color: 8 7 5;
-    --grid-color: 255 241 219;
-    --radius-panel: 2rem;
+    /* PostHog-inspired: cream background + yellow accent + dark text */
+    --bg-primary: 255 251 230;
+    --bg-secondary: 255 255 255;
+    --bg-tertiary: 249 247 238;
+    --bg-dark: 29 31 39;
+    --surface-elevated: 255 255 255;
+    --surface-float: 255 255 255;
+    --text-primary: 29 31 39;
+    --text-secondary: 71 71 85;
+    --text-muted: 148 148 165;
+    --text-on-dark: 255 255 255;
+    --border-subtle: 29 31 39;
+    --border-strong: 29 31 39;
+    --accent-primary: 249 189 43;
+    --accent-hover: 255 202 0;
+    --accent-soft: 249 189 43;
+    --shadow-color: 0 0 0;
+    --grid-color: 29 31 39;
+    --radius-panel: 0.75rem;
     --radius-pill: 999px;
     --page-gutter: clamp(1.25rem, 2vw, 2rem);
-    --section-space: clamp(4.5rem, 8vw, 5rem);
-    --transition-standard: 220ms cubic-bezier(0.22, 1, 0.36, 1);
-    --transition-slow: 480ms cubic-bezier(0.2, 1, 0.22, 1);
+    --section-space: clamp(4rem, 7vw, 5rem);
+    --transition-standard: 200ms cubic-bezier(0.22, 1, 0.36, 1);
+    --transition-slow: 400ms cubic-bezier(0.2, 1, 0.22, 1);
   }
 
   * {
-    @apply border-border-subtle;
     box-sizing: border-box;
   }
 
@@ -46,27 +48,7 @@
     @apply bg-bg-primary font-sans text-text-primary antialiased;
     margin: 0;
     background-color: rgb(var(--bg-primary));
-    background-image: radial-gradient(
-        circle at top left,
-        rgb(var(--accent-soft) / 0.14),
-        transparent 28%
-      ),
-      radial-gradient(
-        circle at top right,
-        rgb(var(--grid-color) / 0.04),
-        transparent 24%
-      ),
-      linear-gradient(
-        180deg,
-        rgb(var(--bg-secondary) / 0.98),
-        rgb(var(--bg-primary) / 1)
-      );
     color: rgb(var(--text-primary));
-    font-feature-settings:
-      "ss01" on,
-      "cv11" on,
-      "rlig" on;
-    position: relative;
   }
 
   a {
@@ -81,7 +63,7 @@
   }
 
   ::selection {
-    background: rgb(var(--accent-soft) / 0.32);
+    background: rgb(var(--accent-primary) / 0.3);
     color: rgb(var(--text-primary));
   }
 
@@ -91,10 +73,10 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-display), serif;
-    font-weight: 500;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
+    font-family: var(--font-display), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
     margin: 0;
   }
 
@@ -133,124 +115,50 @@
     contain-intrinsic-size: 1px 960px;
   }
 
+  /* Clean bordered card — PostHog style */
   .surface-panel {
-    background: linear-gradient(
-      180deg,
-      rgb(var(--surface-float) / 0.74),
-      rgb(var(--surface-elevated) / 0.92)
-    );
+    background: rgb(var(--surface-elevated));
     border: 1px solid rgb(var(--border-subtle) / 0.12);
-    box-shadow:
-      0 24px 64px rgb(var(--shadow-color) / 0.42),
-      inset 0 1px 0 rgb(var(--border-strong) / 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 1px 4px rgb(var(--shadow-color) / 0.06);
   }
 
+  /* Flat sticky nav — replaces old glass header */
   .liquid-glass {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(
-      160deg,
-      rgb(var(--grid-color) / 0.06) 0%,
-      rgb(var(--bg-secondary) / 0.58) 42%,
-      rgb(var(--bg-primary) / 0.72) 100%
-    );
-    border: 1px solid rgb(var(--border-strong) / 0.22);
-    box-shadow:
-      0 22px 48px rgb(var(--shadow-color) / 0.38),
-      inset 0 1px 0 rgb(var(--grid-color) / 0.22);
-    backdrop-filter: blur(16px) saturate(130%) brightness(1.02);
-    -webkit-backdrop-filter: blur(16px) saturate(130%) brightness(1.02);
+    background: rgb(var(--bg-primary));
+    border-bottom: 1px solid rgb(var(--border-subtle) / 0.12);
   }
 
-  /* Top specular highlight — the bright line across the glass rim */
-  .liquid-glass::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 8%;
-    right: 8%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgb(var(--grid-color) / 0.55) 25%,
-      rgb(var(--grid-color) / 0.8) 50%,
-      rgb(var(--grid-color) / 0.55) 75%,
-      transparent 100%
-    );
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0.75;
-  }
-
-  /* Interior caustic glow — the soft light bloom inside the glass */
+  .liquid-glass::before,
   .liquid-glass::after {
-    content: "";
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    height: 60%;
-    background: radial-gradient(
-      ellipse at center,
-      rgb(var(--grid-color) / 0.09) 0%,
-      rgb(var(--accent-soft) / 0.04) 50%,
-      transparent 75%
-    );
-    filter: blur(12px);
-    opacity: 0.55;
-    z-index: 0;
-    pointer-events: none;
+    display: none;
   }
 
   .liquid-glass-content {
     position: relative;
-    z-index: 1;
   }
 
   .adaptive-ink {
-    color: #ffffff;
-  }
-
-  @media (max-width: 767px) {
-    .surface-panel {
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
-    }
-
-    .liquid-glass {
-      background: linear-gradient(
-        160deg,
-        rgb(var(--grid-color) / 0.06) 0%,
-        rgb(var(--bg-secondary) / 0.62) 45%,
-        rgb(var(--bg-primary) / 0.74) 100%
-      );
-      backdrop-filter: blur(16px) saturate(135%) brightness(1.02);
-      -webkit-backdrop-filter: blur(16px) saturate(135%) brightness(1.02);
-      box-shadow:
-        0 18px 40px rgb(var(--shadow-color) / 0.38),
-        inset 0 1px 0 rgb(var(--grid-color) / 0.24);
-    }
-
-    .liquid-glass::after {
-      filter: blur(14px);
-      opacity: 0.6;
-    }
+    color: rgb(var(--text-primary));
   }
 
   .surface-outline {
-    border: 1px solid rgb(var(--border-strong) / 0.16);
+    border: 1px solid rgb(var(--border-subtle) / 0.15);
   }
 
+  /* PostHog-style eyebrow label */
   .eyebrow {
-    color: rgb(var(--accent-hover));
-    font-family: var(--font-mono), monospace;
+    color: rgb(var(--text-muted));
+    font-family: var(--font-sans), sans-serif;
     font-size: 0.75rem;
-    letter-spacing: 0.22em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
+  }
+
+  /* Dark section variant — used for CTA blocks */
+  .section-dark {
+    background-color: rgb(var(--bg-dark));
+    color: rgb(var(--text-on-dark));
   }
 
   .section-frame {
@@ -261,7 +169,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: calc(var(--radius-panel) + 0.25rem);
+    border-radius: var(--radius-panel);
     border: 1px solid rgb(var(--border-subtle) / 0.08);
     pointer-events: none;
   }
